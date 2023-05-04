@@ -5,11 +5,11 @@
 
 <br/>
 
-![clone](match-to-sample/images/clone.png)
+![clone](/match-to-sample/images/clone.png)
 
 - open powershell in windows and run the following command, the repo should now be cloned: 
 
-![cloned](/images/cloned.png)
+![cloned](/match-to-sample/images/cloned.png)
 
 ## How to run task on the command line
 
@@ -21,12 +21,12 @@ if you are on a windows machine, open windows powershell, navigate to your direc
 ### The steps are detailed below: 
 
 - After cloning, navigate to the directory that the python script is in : <br/>
-![changeDir](/images/cd.png)
+![changeDir](/match-to-sample/images/cd.png)
 - and run the command : 
-![runCommand](/images/runComm.png)
+![runCommand](/match-to-sample/images/runComm.png)
 
 ### Happy Matching! 
 
-![matchSample](/images/sample.png)
-![matchTask](/images/task.png)
+![matchSample](/match-to-sample/images/sample.png)
+![matchTask](/match-to-sample/images/task.png)
 
