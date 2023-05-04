@@ -5,7 +5,7 @@
 
 <br/>
 
-![clone](/images/clone.png)
+![clone](match-to-sample/images/clone.png)
 
 - open powershell in windows and run the following command, the repo should now be cloned: 
 
