@@ -13,7 +13,7 @@
 
 ## How to run task on the command line
 
-if you are on a windows machine, open windows powershell, navigate to your directory that has the script and run the following command:
+if you are on a windows machine and have PsychoPy installed, open windows powershell, navigate to your directory that has the script and run the following command:
 <br/>
 `PATH_TO_YOUR_PROGRAM_FILES\PsychoPy\python.exe test1.py`
 <br/>
