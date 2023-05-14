@@ -21,9 +21,9 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 ### The steps are detailed below: 
 
 - After cloning, navigate to the directory that the python script is in : <br/>
-![changeDir](/match-to-sample/images/cd.png)
+![changeDir](/match-to-sample/images/nav.png)
 - and run the command : 
-![runCommand](/match-to-sample/images/runComm.png)
+![runCommand](/match-to-sample/images/run.png)
 
 ### Happy Matching! 
 
