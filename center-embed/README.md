@@ -25,7 +25,7 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 - and run the command : 
 ![runCommand](/center-embed/run2.png)
 
-### Happy Matching! 
+### Happy Sequencing! 
 
 ![matchSample](/match-to-sample/images/sample.png)
 ![matchTask](/match-to-sample/images/task.png)
