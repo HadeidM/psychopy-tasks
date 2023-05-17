@@ -398,6 +398,7 @@ for thisTrial in trials:
     # store data for trials (TrialHandler)
     trials.addData('mouse.x', mouse.x)
     trials.addData('mouse.y', mouse.y)
+    thisExp.addData('mouse.clickedList', allClicks)
     trials.addData('mouse.leftButton', mouse.leftButton)
     trials.addData('mouse.midButton', mouse.midButton)
     trials.addData('mouse.rightButton', mouse.rightButton)
@@ -450,6 +451,11 @@ while continueRoutine:
     # update/draw components on each frame
     
     # *text* updates
+    if text.status == STARTED:
+        t1 = core.Clock()
+        while t1.getTime() < 5.0:
+            continue
+        continueRoutine = False
     if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
         text.frameNStart = frameN  # exact frame index
