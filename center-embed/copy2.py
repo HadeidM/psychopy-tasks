@@ -30,9 +30,9 @@ from psychopy.hardware import keyboard
 
 # setup sound 
 prefs.hardware['audioLib'] = ['PTB']
-rewardS = sound.Sound(value='../sound.wav')
-fullRewardS = sound.Sound(value='../fullAchieve')
-wrongS = sound.Sound(value='../wrong.wav',stopTime=0.6)
+rewardS = sound.Sound(value='./sound.wav')
+fullRewardS = sound.Sound(value='./fullAchieve')
+wrongS = sound.Sound(value='./wrong.wav',stopTime=0.6)
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))

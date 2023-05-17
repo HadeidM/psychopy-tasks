@@ -30,9 +30,9 @@ from psychopy.hardware import keyboard
 
 # setup sound 
 prefs.hardware['audioLib'] = ['PTB']
-rewardS = sound.Sound(value='../sound.wav')
-fullRewardS = sound.Sound(value='../fullAchieve')
-wrongS = sound.Sound(value='../wrong.wav',stopTime=0.6)
+rewardS = sound.Sound(value='./sound.wav')
+fullRewardS = sound.Sound(value='./fullAchieve')
+wrongS = sound.Sound(value='./wrong.wav',stopTime=0.6)
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -172,10 +172,12 @@ frameN = -1
 
 
 #pos_list = [(-0.4, 0.25), (-0.4, -0.25),(0.4, -0.25),(0.4, 0.25),(0,0.25),(0,-0.25)]
+
+### VALID SEQUENCE PERMUTATIONS
 clickables1 = [blue_circ, blue_tri, red_tri, red_circ]
-#clickables2 = [blue_tri, blue_circ, red_circ, red_tri]
-#clickables3 = [red_circ, red_tri, blue_tri, blue_circ]
-#clickables4 = [red_tri, red_circ, blue_circ, blue_tri]
+clickables2 = [blue_tri, blue_circ, red_circ, red_tri]
+clickables3 = [red_circ, red_tri, blue_tri, blue_circ]
+clickables4 = [red_tri, red_circ, blue_circ, blue_tri]
 trialSuccessNum = 0
 #rand1 = randint(0,6)
 #rand2 = randint(0,6)
@@ -188,13 +190,37 @@ trialSuccessNum = 0
 #while rand4 == rand1 or rand3 == rand4 or rand2 == rand4:
 #        rand3 = randint(0,6)
 #rand_4 = [pos_list[rand1], pos_list[rand2], pos_list[rand3], pos_list[rand4]]
+count = 0
+import random
+rand1 = random.randint(0,3)
+pos_list = [(-0.4, 0.25), (-0.4, -0.25),(0.4, -0.25),(0.4, 0.25)] 
+posSet = []
+while count != 4:
+    if not rand1 in posSet:
+        print(rand1)
+        posSet.append(rand1)
+        count += 1
+    else:
+        rand1 = random.randint(0,3)
+idx = 0
+print(posSet)
+for i in range(len(trialComponents[:4])):
+    trialComponents[i].pos = pos_list[posSet[i]]
 #for i in range(len(clickables)):
 #    clickables[i].pos = rand_4[i]
 # --- Run Routine "trial" ---
 currClickable = []
 allClicks = []
+
+###############################################################
+# The code below rewards only the responses that are following a
+# correct permutation of the sequence from above. If the subject
+# fails to follow the sequence, the screen turns black.
+################################################################
+# The subject has to get 4 trials correct in a row, and then, the
+# fifth trial records the test response of the subject.
+################################################################
 while continueRoutine:
-    
     # get current time
     t = routineTimer.getTime()
     tThisFlip = win.getFutureFlipTime(clock=routineTimer)

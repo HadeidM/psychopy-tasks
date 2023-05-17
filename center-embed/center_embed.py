@@ -329,6 +329,8 @@ for thisTrial in trials:
                         secondTouch += 1
                     elif currC == 2:
                         thirdTouch += 1
+                    ########################
+                    # Add Pellet dispenser code below
                     rewardS.play()
                     clicked_list.append(clickable.name)
                     clickable.opacity -= 0.5
@@ -342,6 +344,8 @@ for thisTrial in trials:
                 else:
                     wrongSelect = True
                     ##### The reward sound plays regardless of whethere the subject follows the correct sequence
+                    ########################
+                    # Add Pellet dispenser code below
                     rewardS.play()
                     clicked_list.append(clickable.name)
                     clickable.opacity -= 0.5
