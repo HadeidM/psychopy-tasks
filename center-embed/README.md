@@ -21,11 +21,11 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 ### The steps are detailed below: 
 
 - After cloning, navigate to the directory that the python script is in : <br/>
-![changeDir](/match-to-sample/images/cd.png)
+![changeDir](/center-embed/nav2.png)
 - and run the command : 
-![runCommand](/match-to-sample/images/runComm.png)
+![runCommand](/center-embed/run2.png)
 
-### Happy Matching! 
+### Happy Sequencing! 
 
 ![matchSample](/match-to-sample/images/sample.png)
 ![matchTask](/match-to-sample/images/task.png)
