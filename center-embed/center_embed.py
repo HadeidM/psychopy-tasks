@@ -30,9 +30,9 @@ from psychopy.hardware import keyboard
 
 # setup sound 
 prefs.hardware['audioLib'] = ['PTB']
-rewardS = sound.Sound(value='../sound.wav')
-fullRewardS = sound.Sound(value='../fullAchieve')
-wrongS = sound.Sound(value='../wrong.wav',stopTime=0.6)
+rewardS = sound.Sound(value='./sound.wav')
+fullRewardS = sound.Sound(value='./fullAchieve')
+wrongS = sound.Sound(value='./wrong.wav',stopTime=0.6)
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -145,6 +145,13 @@ globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.Clock()  # to track time remaining of each (possibly non-slip) routine 
 
 # set up handler to look after randomisation of conditions etc
+
+############################################################
+# The code below sets up the number of trials to train the subject
+# currently, the number of reps (nReps) is set to 3, you can change it 
+# to any number. for example: nReps = 200.0 [NOTE]
+############################################################
+
 trials = data.TrialHandler(nReps=3.0, method='random', 
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
@@ -156,6 +163,7 @@ if thisTrial != None:
     for paramName in thisTrial:
         exec('{} = thisTrial[paramName]'.format(paramName))
 
+# set up global variables
 trialNum = 0
 trialSuccess = 0
 firstTouch = 0
@@ -188,10 +196,14 @@ for thisTrial in trials:
     currC = 0
     trialNum += 1
     # keep track of which components have finished
+
+    ##################################################################################################
+    # Code below sets position for each stimulus at a random position out of the 4 on-screen positions
+    ##################################################################################################
     trialComponents = [blue_circ, blue_tri, red_tri, red_circ, mouse]
     count = 0
     rand1 = random.randint(0,3)
-    pos_list = [(-0.4, 0.25), (-0.4, -0.25),(0.4, -0.25),(0.4, 0.25)] # ,(0,0.25),(0,-0.25
+    pos_list = [(-0.4, 0.25), (-0.4, -0.25),(0.4, -0.25),(0.4, 0.25)] 
     posSet = []
     while count != 4:
         if not rand1 in posSet:
@@ -205,6 +217,7 @@ for thisTrial in trials:
     for comp in trialComponents[:4]:
         comp.pos = pos_list[posSet[idx]]
         idx+=1
+    ####################################################################################################
     for thisComponent in trialComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -220,10 +233,6 @@ for thisTrial in trials:
     clickables1 = [blue_circ, blue_tri, red_tri, red_circ]
     wrongSelect = False
     allClicks = []
-    
-    
-    
-    
     
     # --- Run Routine "trial" ---
     while continueRoutine:
@@ -303,16 +312,16 @@ for thisTrial in trials:
                     mouse.rightButton.append(buttons[2])
                     mouse.time.append(mouse.mouseClock.getTime())
         # Run 'Each Frame' code from code
+        ### setting up the correct sequence
         clickables = [blue_circ, blue_tri, red_tri, red_circ]
-#        temp = blue_circ
         startTime = -1
         for clickable in clickables:
             if mouse.isPressedIn(clickable):
                 clock1 = core.Clock();
-                # check clickable correct
-                
-                # is the second touch rate based on whether the participant 
-                # is in sequence and touching the particular shape? 
+                #####################################################
+                ## Code below checks whether the subject is following 
+                ## the sequence correctly
+                #####################################################
                 if not wrongSelect and clickable == clickables1[currC]:
                     if currC == 0:
                         firstTouch += 1
@@ -332,6 +341,7 @@ for thisTrial in trials:
                     print("CurrC: ", currC)
                 else:
                     wrongSelect = True
+                    ##### The reward sound plays regardless of whethere the subject follows the correct sequence
                     rewardS.play()
                     clicked_list.append(clickable.name)
                     clickable.opacity -= 0.5
@@ -342,27 +352,9 @@ for thisTrial in trials:
                     print(clickable.name, currC)
                     currC+=1
                     print("CurrC: ", currC)
-                    
-#        if wrongSelect:
-#            print("wrong clicks: ", clicked_list)
-#            for clickable in trialComponents[:4]:
-#                clickable.setAutoDraw(False)
-#            clock2 = core.Clock()
-#            wrongS.play()
-#            win.color = 'black'
-#            while clock1.getTime() < 0.8:
-#                win.flip()
-#            win.color = 'grey'
-#            currC = 0
-#            clicked_list = []
-#            for clickable in trialComponents[:4]:
-#                clickable.setAutoDraw(True)
-#            print("trial Num: ", trialNum)
-#            wrongSelect = False
-#            continueRoutine = False
-            
             
         if len(clicked_list) == 4:
+            # Only count successful sequence if the subject did not mess up the sequence
             if not wrongSelect:
                 trialSuccess += 1
                 fullRewardS.play()
@@ -418,6 +410,12 @@ for thisTrial in trials:
 
 
 # --- Prepare to start Routine "end_dash" ---
+
+##########################################################################
+# End dash screen displays the number of successful touch metrics and the no.
+# of successfully completed trials. 
+##########################################################################
+
 continueRoutine = True
 routineForceEnded = False
 text = visual.TextStim(win=win, name='text',
