@@ -80,12 +80,7 @@ win = visual.Window(
     blendMode='avg', useFBO=True, 
     units='height')
 win.mouseVisible = False
-# store frame rate of monitor if we can measure it
-#expInfo['frameRate'] = win.getActualFrameRate()
-#if expInfo['frameRate'] != None:
-#    frameDur = 1.0 / round(expInfo['frameRate'])
-#else:
-#    frameDur = 1.0 / 60.0  # could not measure, so guess
+
 # --- Setup input devices ---
 ioConfig = {}
 
@@ -102,8 +97,11 @@ eyetracker = None
 defaultKeyboard = keyboard.Keyboard(backend='iohub')
 
 # --- Initialize components for Routine "WelcomeScreen" ---
+
+
+### Setting up components for delay and no. of distractor select screen
 textWelcom = visual.TextStim(win=win, name='textWelcom',
-    text='Welcome to an Image Select Experiment! ',
+    text='Welcome to Match-to-sample task!',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -143,7 +141,7 @@ textDistractor2 = visual.TextStim(win=win, name='D-two',
     depth=0.0);
 
 chooseText = visual.TextStim(win=win, name='chose',
-    text='Please choose an inter-trial delay from below (click)',
+    text='Please choose a stimulus display delay from below (click)',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -151,7 +149,7 @@ chooseText = visual.TextStim(win=win, name='chose',
     depth=0.0);
 
 chooseDist = visual.TextStim(win=win, name='choseD',
-    text='Please chose no. of distractors ',
+    text='Please chose no. of distractors (click)',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -267,6 +265,14 @@ frameN = -1
 ITDelay = 0
 select = [False, False]
 # --- Run Routine "WelcomeScreen" ---
+
+############################################################################
+# Code below allows user to choose the stimuli display delay
+# which is the delay after the subject has been shown 
+# a single stimuli image. Currently, there can be either a 1 or 2 second delay
+# but these values can be changed in the code. (setting ITDelay)
+############################################################################
+
 while continueRoutine: #  and routineTimer.getTime() < 1.0
     # get current time
     t = routineTimer.getTime()
@@ -399,6 +405,13 @@ for thisComponent in WelcomeScreenComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
         
+
+#########################################################
+# Code below allows users to select the number of distractors 
+# that are going to be shown alongside the original stimulus image
+# Currently, users can only choose 1 or 2
+#########################################################
+
 while continueRoutine: #  and routineTimer.getTime() < 1.0
     # get current time
     t = routineTimer.getTime()
@@ -426,8 +439,6 @@ while continueRoutine: #  and routineTimer.getTime() < 1.0
             mouseRespStart.tStart = t  # local t and not account for scr refresh
             mouseRespStart.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(mouseRespStart, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-#            thisExp.addData('mouseResp.started', t)
             mouseRespStart.status = STARTED
             mouseRespStart.mouseClock.reset()
             prevButtonState = mouseRespStart.getPressed()  # if button is down already this ISN'T a new click
@@ -547,6 +558,11 @@ for thisTrial in trials: # added [:5] for five trials
     frameN = -1
     
     # --- Run Routine "trial" ---
+
+
+    #######################################################################################
+    # Code below just shows the subject the first image stimulus and waits for the click response
+    #######################################################################################
     while continueRoutine:
         # get current time
         t = routineTimer.getTime()
@@ -573,7 +589,6 @@ for thisTrial in trials: # added [:5] for five trials
             mouseResp.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(mouseResp, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-#            thisExp.addData('mouseResp.started', t)
             mouseResp.status = STARTED
             mouseResp.mouseClock.reset()
             prevButtonState = mouseResp.getPressed()  # if button is down already this ISN'T a new click
@@ -591,6 +606,8 @@ for thisTrial in trials: # added [:5] for five trials
                         clickableList = [[target,]]
                     for obj in clickableList:
                         if obj.contains(mouseResp):
+                            ##### Play reward sound when the subject clicks on component
+                            ##### Pellet dispenser code can be added around the rewardS.play() line below
                             rewardS.play()
                             clock1 = core.Clock()
                             target.setSize((0.5,0.5))
@@ -611,6 +628,9 @@ for thisTrial in trials: # added [:5] for five trials
                     mouseResp.time.append(mouseResp.mouseClock.getTime())
                     if gotValidClick:
                         continueRoutine = False  # abort routine on response
+                        
+                        
+
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -619,6 +639,7 @@ for thisTrial in trials: # added [:5] for five trials
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
             routineForceEnded = True
+            
             break
         continueRoutine = False  # will revert to True if at least one component still running
         for thisComponent in trialComponents:
@@ -634,12 +655,6 @@ for thisTrial in trials: # added [:5] for five trials
     for thisComponent in trialComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # store data for trials (TrialHandler)
-#    trials.addData('mouseResp.x', mouseResp.x)
-#    trials.addDFata('mouseResp.y', mouseResp.y)
-#    trials.addData('mouseResp.leftButton', mouseResp.leftButton)
-#    trials.addData('mouseResp.midButton', mouseResp.midButton)
-#    trials.addData('mouseResp.rightButton', mouseResp.rightButton)
     trials.addData('mouseResp.time', mouseResp.time)
     trials.addData('mouseResp.clicked_name', mouseResp.clicked_name)
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
@@ -661,7 +676,7 @@ for thisTrial in trials: # added [:5] for five trials
     # reset timers
     t = 0
     _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
+    frameN = -1    
     
     # --- Run Routine "blank250" ---
     while continueRoutine and routineTimer.getTime() < 0.25:
@@ -715,11 +730,19 @@ for thisTrial in trials: # added [:5] for five trials
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+
     if routineForceEnded:
         routineTimer.reset()
     else:
         routineTimer.addTime(-0.250000)
-    
+
+
+    ################################
+    # Stimulus display delay that was set before
+    ################################    
+    cl1 = core.Clock()
+    while cl1.getTime() < ITDelay: 
+        continue
     # --- Prepare to start Routine "trial2" ---
     continueRoutine = True
     routineForceEnded = False
@@ -787,6 +810,14 @@ for thisTrial in trials: # added [:5] for five trials
     #initialize boolean for distractor select
     distSelect = False
     # --- Run Routine "trial2" ---
+
+    ##################################################################################
+    # Code below displays the target and distractors and records subjects' responses 
+    #
+    # NOTE: there is a comment that points to where the pellet dispenser code should
+    # be added                                                                    
+    ##################################################################################
+
     while continueRoutine:
         # get current time
         t = routineTimer.getTime()
@@ -871,6 +902,8 @@ for thisTrial in trials: # added [:5] for five trials
                         if obj.contains(mouseResp2):
                             if obj == imageTarg:
                                 clk4 = core.Clock()
+                                ##### Play reward sound when the subject response is correct
+                                ##### Pellet dispenser code can be added around the rewardS.play() line below
                                 rewardS.play()    
                                 imageTarg.setSize((0.5,0.5))
                                 win.flip()
@@ -888,6 +921,7 @@ for thisTrial in trials: # added [:5] for five trials
                                     distractor1.setAutoDraw(False)
                                     distractor2.setAutoDraw(False)
                                 imageTarg.setAutoDraw(False)
+                                ##### Play failure sound when the subject response is wrong
                                 wrongS.play()
                                 time.sleep(0.6)
                                 while clock2.getTime() < 1.8:
@@ -929,17 +963,10 @@ for thisTrial in trials: # added [:5] for five trials
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-#    if distSelect:
-#        clock2 = core.Clock()
-#        win.color = 'black'
-#        win.flip()
-#        wrongS.play()
-#        time.sleep(0.6)
-##        
-            
+    ### Change window color and wait 2 seconds for next trial..
     clock3 = core.Clock()
     win.color = 'green'
-    while clock3.getTime() < ITDelay:
+    while clock3.getTime() < 2.0:
         win.flip()
     win.color = [0,0,0]
     # --- Ending Routine "trial2" ---
@@ -947,11 +974,6 @@ for thisTrial in trials: # added [:5] for five trials
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # store data for trials (TrialHandler)
-#    trials.addData('mouseResp2.x', mouseResp2.x)
-#    trials.addData('mouseResp2.y', mouseResp2.y)
-#    trials.addData('mouseResp2.leftButton', mouseResp2.leftButton)
-#    trials.addData('mouseResp2.midButton', mouseResp2.midButton)
-#    trials.addData('mouseResp2.rightButton', mouseResp2.rightButton)
     trials.addData('mouseResp2.time', mouseResp2.time)
     trials.addData('mouseResp2.clicked_name', mouseResp2.clicked_name)
     # the Routine "trial2" was not non-slip safe, so reset the non-slip timer
@@ -1059,6 +1081,8 @@ df=pd.read_csv(filename+'.csv', encoding = "utf-8")
 df2= df.drop(columns=["trials.thisN", "trials.thisIndex", "Unnamed: 14"]) 
 print(df2)
 #definin de2 will help you keep the original pdf
+
+########### latestCleanDataOutput.csv contains all cleaned up trial data 
 df2.to_csv('data/latestCleanDataOutput.csv', index=False)
 print("allcode passed")
 core.quit()
