@@ -25,8 +25,22 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 - and run the command : 
 ![runCommand](/match-to-sample/images/run.png)
 
-### Happy Matching! 
+### Task Details
+
+- Choose the stimulus display delay 
+
+![delayChoose](/match-to-sample/delay.png)
+
+- Choose the number of distractors
+
+![chooseDist](/match-to-sample/dist.png)
+
+- A sample stimulus is displayed which the subject has to click
 
 ![matchSample](/match-to-sample/images/sample.png)
+
+- The target image is displayed with the distractor, if the target is selected, a reward sound is played and the window goes green. If not, the screen turns black and a buzzer sound is played.
+
 ![matchTask](/match-to-sample/images/task.png)
 
+### Happy Matching!
