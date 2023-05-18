@@ -34,3 +34,5 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 - At the end of the trial sequence a dashboard pops up with the number of correct trials and the touch statistics for the image sequence stimuli
 
 ![Dash](/center-embed/dash.png)
+
+### Happy Sequencing!
