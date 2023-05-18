@@ -25,7 +25,9 @@ if you are on a windows machine and have PsychoPy installed, open windows powers
 - and run the command : 
 ![runCommand](/center-embed/run2.png)
 
-### Happy Sequencing! 
+### Task Details
 
-![matchSample](/match-to-sample/images/sample.png)
-![matchTask](/match-to-sample/images/task.png)
+- The subject is shown images of four shapes and has to choose them in the correct center-embedded sequence which is blue circle, blue triangle, red triangle, red circle
+![centEmbed](/center-embed/cent.png)
+- At the end of the trial sequence a dashboard pops up with the number of correct trials and the touch statistics for the image sequence stimuli
+![Dash](/center-embed/dash.png)
